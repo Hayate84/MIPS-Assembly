@@ -1,20 +1,22 @@
+						#naive division algorithm
 						.text
 
-						li			$a0, 44444	#large
-						li			$a1, 5			#small
+						li			$a0, 44444	#large in $a0
+						li			$a1, 5		#small in $a1
 		
 						jal			divNaive
-						move	$a0, $v0
+						move		$a0, $v0
 						jal			printInt
-						move	$a0,	$v1
+						move		$a0,	$v1
 						jal			printInt
 exit:
 						li			$v0, 10
 						syscall		
 
-#naive division algorithm. The quotiend is in $v0 the rem is in $v1
-#									   The large number must be in $a0
-#									   The small in $a1
+#naive division algorithm. 
+#The quotiend is in $v0 the rem is in $v1
+#The large number must be in $a0
+#The small in $a1
 
 divNaive:
 						addi		$sp,	$sp, -8

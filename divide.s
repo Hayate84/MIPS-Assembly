@@ -1,3 +1,4 @@
+						#naive division algorithm
 						.text
 
 						li			$a0, 44444	#large in $a0

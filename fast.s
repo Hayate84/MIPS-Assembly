@@ -1,4 +1,4 @@
-#fast exponantiation
+#fast exponantiation must check
 #b^n	b = $a0	n = $a1
 
 						.text

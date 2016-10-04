@@ -1,4 +1,6 @@
-      .text
+#Some simple math functions
+
+     .text
 
       li    $a0, 3
       li    $a1, 9
@@ -58,46 +60,50 @@ L1:
       beqz   $t0, L2         #if number is even
       div    $a1, $a1, 2     #b^n = (b^(n/2))^2
       jal    fast
-      mul  0,	$v0, $v0	#square the value
-						lw			$ra,	8($sp)					#pop the stack
-	lw			$a1,	4($sp)					#and return
-						addi		$sp,	$sp, 8
-						jr			$ra
-L2:																	#if number is not even
-						addi		$a1, $a1, -1					#b^n = b * b^(n - 1)
-						jal			fast
-						mul		$v0, $v0, $a0				#the multiplication
-						lw			$ra,	8($sp)					#pop the stack
-						lw			$a1,	4($sp)					#and return
-						addi		$sp,	$sp, 8
-						jr			$ra	
+      mul    0,	$v0, $v0     #square the value
+      lw     $ra, 8($sp)     #pop the stack
+      lw     $a1, 4($sp)     #and return
+      addi   $sp, $sp, 8
+      jr     $ra
+L2:		             #if number is not even
+      addi   $a1, $a1, -1    #b^n = b * b^(n - 1)
+      jal    fast
+      mul    $v0, $v0, $a0   #the multiplication
+      lw     $ra, 8($sp)     #pop the stack
+      lw     $a1, 4($sp)     #and return
+      addi   $sp, $sp, 8
+      jr     $ra
+      
 square:
-						mul		$a0, $a0 $a0
-						jr			$ra
-						
+      mul    $a0, $a0 $a0
+      jr     $ra
+      
+#function to check if a number is even
 #is number in $a0 even?
-iseven:																#function to check if a number is even
-						rem		$t0, $a1, 2					#the psedoinstruction for the rem
-						beqz 	$t0, true						
-						li			$t0, 0							#if is not even
-						jr			$ra								#return 0 for false
+
+iseven:			
+      rem   $t0, $a1, 2    #the psedoinstruction for the rem
+      beqz  $t0, true						
+      li    $t0, 0         #if is not even
+      jr    $ra		   #return 0 for false
 true:																	#else
-						li			$t0, 1							#return 1 for true
-						jr			$ra
+      li    $t0, 1	   #return 1 for true
+      jr    $ra
 						
 #is number in $a0 odd?
+
 odd:
-						rem		$a0, $a0, 2
-						beqz 	$a0, true
-						li			$a0, 1
-						jr			$ra
+      rem   $a0, $a0, 2
+      beqz  $a0, tru
+      li    $a0, 1
+      jr    $ra
 tru:
-						li			$a0, 0
-						jr			$ra		
+      li    $a0, 0
+      jr    $ra		
 						
 #naive division algorithm. The quotiend is in $v0 the rem is in $v1
-#									   The large number must be in $a0
-#									   The small in $a1
+#The large number must be in $a0
+#The small in $a1
 
 divNaive:
 						addi		$sp,	$sp, -8

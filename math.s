@@ -1,4 +1,6 @@
-#Some simple math functions
+##############################
+# Some simple math functions.#
+##############################
 
      .text
 

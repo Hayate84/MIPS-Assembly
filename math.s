@@ -125,36 +125,42 @@ divNaive:
 	  		   
       beqz  $t2, rec2
       addi  $sp, $sp, 8     #pop the stack 
-      move  $v1, $a0#the rem of the number is large < small == True
-      li   $v0, 0
-      jr   $ra
+      move  $v1, $a0        #the rem of the number is large < small == True
+      li    $v0, 0
+      jr    $ra
 rec2:
-      sub	 $a0, $a0, $a1		   #keep subtratring the small number from the large
-      jal			divNaive					
-  				addi		$v0, $v0 1			  #the quotiend is, how many time we sutracted the small number from the large
-     	lw			$ra,	4($sp)
-      lw			$a0,	8($sp)
-     	addi		$sp,	$sp, 8
-						jr			$ra						
+      sub   $a0, $a0, $a1   #keep subtratring the small number from the large
+      jal   divNaive					
+      addi  $v0, $v0 1	    #the quotiend is, how many time we sutracted the small number from the large
+      lw    $ra, 4($sp)
+      lw    $a0, 8($sp)
+      addi  $sp, $sp, 8
+      jr    $ra		
+      
+######################################
+# printInt.                          #
+# print the integer in argument $a0. #
+######################################
+      
 printInt:		
-						addi		$sp, $sp, -4
-						sw		$ra, 0($sp)
-						li			$v0, 1
-						syscall
-						addi		$sp, $sp, -4 		#extra code for the stack
-						sw		$ra, 0($sp)  		#to keep the value of ra
-				 	jal			printEndl	   		#for printing new line
-						lw			$ra, 0($sp)
-				 	addi		$sp, $sp, 4
-						jr			$ra
+
+       addi  $sp, $sp, -4
+       sw    $ra, 0($sp)
+       li    $v0, 1
+       syscall
+       addi  $sp, $sp, -4  #extra code for the stack
+       sw    $ra, 0($sp)   #to keep the value of ra
+       jal   printEndl     #for printing new line
+       lw    $ra, 0($sp)
+       addi  $sp, $sp, 4
+       jr    $ra
 printEndl:
-				 	li			$v0, 4
-				 	move	$t0, $a0   		#usually a0 contains some value
-				 	la			$a0, endl
-					 syscall
-					 move	$a0, $t0   		#restore a0 original value
-						jr			$ra
+       li    $v0, 4
+       move  $t0, $a0      #usually a0 contains some value
+       la    $a0, endl
+       syscall
+       move  $a0, $t0      #restore a0 original value
+       jr    $ra
 	
-						.data
-endl:					.asciiz "\n"
-buffer:				.space 16
+       .data
+endl:  .asciiz "\n"

@@ -1,3 +1,9 @@
+
+############################################################################
+# Pascals Triangle:                                                        #
+#                     Program to print the first 9 terms,                  #
+#                     of Pascals triangle.                                 #
+############################################################################
 			.text
 initialize_variables:
 

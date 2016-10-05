@@ -86,7 +86,7 @@ iseven:
       beqz  $t0, true						
       li    $t0, 0         #if is not even
       jr    $ra		   #return 0 for false
-true:																	#else
+true:			   #else
       li    $t0, 1	   #return 1 for true
       jr    $ra
 						
@@ -99,18 +99,22 @@ odd:
       jr    $ra
 tru:
       li    $a0, 0
-      jr    $ra		
-						
-#naive division algorithm. The quotiend is in $v0 the rem is in $v1
-#The large number must be in $a0
-#The small in $a1
+      jr    $ra	
+      
+######################################################################						
+# naive integer - division algorithm.                                #
+# The quotiend is in $v0 the rem is in $v1                           #
+# The large number must be in $a0                                    #
+# The small in $a1                                                   #    
+######################################################################
 
 divNaive:
-						addi		$sp,	$sp, -8
-						sw		$ra,	  4($sp)
-						sw		$a0,	  8($sp)
+
+      addi  $sp, $sp, -8
+      sw    $ra, 4($sp)
+      sw    $a0, 8($sp)
 					   
-					    slt			$t0,	$a0,	$a1			#large < small
+      slt			$t0,	$a0,	$a1			#large < small
 						seq		$t1,	$a0,	$zero		#large == zero
 						or			$t2,  $t0,	$t1			
 					   

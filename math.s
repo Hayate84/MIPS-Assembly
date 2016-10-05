@@ -14,10 +14,10 @@ exit:
       
 ####################################################						
 # recursive naive algorithm for power of a number. #
-# x = b^n                                          # 
+# x = b^n.                                         # 
 # b in $a0.                                        #   
-# n in $a1                                         #
-# x returning value in v0                          # 
+# n in $a1.                                        #
+# x returning value in v0.                         # 
 ####################################################
 
 power:

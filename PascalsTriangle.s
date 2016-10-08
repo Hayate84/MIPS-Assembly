@@ -25,7 +25,7 @@ start:
 			addi	$t1, $t1, -1		#$t1 -= 1 
 			j	start			#loop
 stop:
-			move	$a0, $t0		#restore the original argument value
+			move	$a0, $t0			#restore the original argument value
 loop:							#loop while $a1 > $a0
 			bgt	$a1, $a0, exit		#is $a1 > $a0?
 			jal	binomial		#call the function

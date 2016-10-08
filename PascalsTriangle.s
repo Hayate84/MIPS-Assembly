@@ -48,8 +48,11 @@ exit:
 			li	$v0, 10		        #value code to terminate the program
 			syscall				#end the program
 
-#binomial coefficient. Very naive way to compute with the function ((n!)/(k!) * (n - k)!)
-#argument $a0 is n argument, argument $a1 is k argument
+####################################################################################
+# Binomial coefficient: 						           #
+#		Very naive way to compute with the function ((n!)/(k!) * (n - k)!) #
+#		argument $a0 is n argument, argument $a1 is k argument             #
+####################################################################################
 						
 binomial:	
 			addi	$sp, $sp, -12		#free space from the stack
@@ -78,39 +81,48 @@ binomial:
 			mul	$t0, $t0, $t3		#(k!) * (n - k)!
 			div	$v0, $t1, $t0		#we divide the previous value with n! and keep it in $v0 return value
 						
-			lw	$a0, 4($sp)	#restore argument values
-						lw		$a1, 8($sp)
-						addi		$sp, $sp, 12	#pop stack
-						jr		$ra		#return
+			lw	$a0, 4($sp)		#restore argument values
+			lw	$a1, 8($sp)
+			addi	$sp, $sp, 12		#pop stack
+			jr	$ra			#return
 
-#factorial recursive. The return value is in $v0 
-#		      Argument in $a0
-fact:
-						addi		$sp, $sp, -8
-						sw		$ra, 4($sp)
-						sw		$a0, 8($sp)			
+##################################################			
+# Factorial recursive. 				 #  
+#		      The return value is in $v0 # 
+#		      Argument in $a0            #
+##################################################
+
+fact:			
+			addi		$sp, $sp, -8
+			sw		$ra, 4($sp)
+			sw		$a0, 8($sp)			
 					   
-						bnez		$a0, recfact
-						addi		$sp, $sp, 8	#pop the stack
-						li		$v0, 1		#return 1
-						jr		$ra
+			bnez		$a0, recfact	
+			addi		$sp, $sp, 8	#pop the stack
+			li		$v0, 1		#return 1
+			jr		$ra
 recfact:
-						addi		$a0, $a0, -1	#n - 1
-						jal		fact				
-						lw		$ra, 4($sp)
-						lw		$a0, 8($sp)
-						addi		$sp, $sp, 8
-						mul		$v0, $a0, $v0	#n*fact
-						jr		$ra
+			addi		$a0, $a0, -1	#n - 1
+			jal		fact				
+			lw		$ra, 4($sp)
+			lw		$a0, 8($sp)
+			addi		$sp, $sp, 8
+			mul		$v0, $a0, $v0	#n*fact
+			jr		$ra
+
+##############################################
+# Print end line.			     #
+#		  Line "\n" is in .data "\n" #
+##############################################
 
 printEndl:
-						li		$v0, 4
-						move		$t0, $a0	#usually a0 contains some value
-						la		$a0, endl
-						syscall
-						move		$a0, $t0	#restore a0 original value
-						jr		$ra
+			li		$v0, 4
+			move		$t0, $a0	#usually a0 contains some value
+			la		$a0, endl
+			syscall
+			move		$a0, $t0	#restore a0 original value
+			jr		$ra
 	
-						.data
-endl:						.asciiz "\n"
-spaces:						.asciiz " "
+			.data
+endl:			.asciiz "\n"
+spaces:			.asciiz " "

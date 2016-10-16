@@ -30,15 +30,15 @@ loop:							#loop while $a1 > $a0
 			bgt	$a1, $a0, exit		#is $a1 > $a0?
 			jal	binomial		#call the function
 print:
-			move	$t0, $a0		#store a0 variable because we need to print the value and one space
-			move	$a0, $v0		#move the value to print
+			move	$t0, $a0			#store a0 variable because we need to print the value and one space
+			move	$a0, $v0			#move the value to print
 			li	$v0, 1			#code for print	integer
 			syscall				#print the integer
 			la	$a0, spaces		#load the space string
 			li	$v0, 4			#code for print string
 			syscall				#print the string
 decrement:
-			move	$a0, $t0		#restore argument to the correct value
+			move	$a0, $t0			#restore argument to the correct value
 			addi	$a1, $a1, 1		#$a1 += 1 
 			j	loop			#loop until $a1 > $a0
 exit:
@@ -64,15 +64,15 @@ binomial:
 			sw	$ra, 12($sp)		#space for the stack to keep the value of $ra
 			jal	fact			#call factorial
 			lw	$ra, 12($sp)		#restore $ra value
-			move	$t1, $v0		#keep it in a temporary value
+			move	$t1, $v0			#keep it in a temporary value
 						
-			move	$a0, $t3		#compute (n - k)! like the previous way
+			move	$a0, $t3			#compute (n- k)! like the previous way
 			sw	$ra, 12($sp)
 			jal	fact
 			lw	$ra, 12($sp)
-			move	$t3, $v0		#$t3 value now is $t3! 
+			move	$t3, $v0			#$t3 value now is $t3! 
 						
-			move	$a0, $a1		#compute k!
+			move	$a0, $a1			#compute k!
 			sw	$ra, 12($sp)
 			jal	fact
 			lw	$ra, 12($sp)
@@ -117,10 +117,10 @@ recfact:
 
 printEndl:
 			li		$v0, 4
-			move		$t0, $a0	#usually a0 contains some value
+			move		$t0, $a0		#usually a0 contains some value
 			la		$a0, endl
 			syscall
-			move		$a0, $t0	#restore a0 original value
+			move		$a0, $t0		#restore a0 original value
 			jr		$ra
 	
 			.data

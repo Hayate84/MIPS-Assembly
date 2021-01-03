@@ -16,7 +16,7 @@ triangle:						#while	$t4 != $t5
 			add	$a0, $a0, $t4		#n = n + 1
 						
 			sub	$t1, $t5, $a0		#t1 variable for the indentation
-			move	$t0, $a0			#store a0 to a temporary variable because we need to print spaces
+			move	$t0, $a0		#store a0 to a temporary variable because we need to print spaces
 			la	$a0, spaces		#load the space string
 			li	$v0, 4			#code to print string
 start:
